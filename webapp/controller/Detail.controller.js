@@ -12,7 +12,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		 */
 		formatter: formatter,
 		onInit: function () {
-
+//Test 2 changes
 			var oThis = this;
 			//sap.ui.core.UIComponent.getRouterFor(this).attachRouteMatched(this.onRouteMatched, this);
 			var oComponent = oThis.getOwnerComponent();
