@@ -1,0 +1,16 @@
+/* Enter your custom styles here */
+
+.btntemplate {
+    /*width: 3.25rem; */
+    min-width: 10%;
+}
+
+.erroricon {
+    color: red !important;
+    padding: 10px;
+}
+
+.errotext {
+    padding-left: 10px !important;
+    padding: 10px;
+}

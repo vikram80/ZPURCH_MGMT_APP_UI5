@@ -1,0 +1,136 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "zpurch_mgmt_app.ZPURCH_MGMT_APP",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZPOAPP_SRV": {
+				"uri": "/sap/opu/odata/sap/ZPOAPP_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "zpurch_mgmt_app.ZPURCH_MGMT_APP.view.Search",
+			"type": "XML",
+			"async": true,
+			"id": "Search"
+		},
+		"dependencies": {
+			"minUI5Version": "1.65.6",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "zpurch_mgmt_app.ZPURCH_MGMT_APP.i18n.i18n"
+				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZPOAPP_SRV",
+				"preload": true
+			},
+			"POModel": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request",
+					"useBatch": true
+				},
+				"dataSource": "ZPOAPP_SRV",
+				"preload": true
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}],
+			"js": []
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "zpurch_mgmt_app.ZPURCH_MGMT_APP.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [{
+				"name": "Search",
+				"pattern": "",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["Search"]
+			}, {
+				"name": "Detail",
+				"pattern": "Detail",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["Detail"]
+			}],
+			"targets": {
+				"Search": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "Search"
+				},
+				"Detail": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": "",
+					"viewName": "Detail"
+				}
+			}
+		}
+	}
+}

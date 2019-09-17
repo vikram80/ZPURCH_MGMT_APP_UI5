@@ -1,0 +1,46 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="zpurch_mgmt_app.ZPURCH_MGMT_APP.controller.Detail">
+	<App>
+		<pages>
+			<Page title="{i18n>pOdetailslbl}" showNavButton="true" navButtonPress="onNavBack">
+				<!--<content>-->
+				<ObjectHeader xmlns="sap.m" title="{i18n>lblPOnumber} {oDetailModel>/Ebeln}" number="100.00" numberUnit="CAD $" id="header0">
+					<attributes>
+						<ObjectAttribute title="PO Type" text="{oDetailModel>/Bsart}" id="idPOType"/>
+						<ObjectAttribute title="Create Date" text="{path: 'oDetailModel>/AedatFr', formatter: '.formatter.abapDateFormat'}" id="idChangeDate"/>
+						<ObjectAttribute title="Created By" text="{oDetailModel>/Ernam}" id="idCreateBy"/>
+					</attributes>
+					<statuses>
+						<ObjectStatus title="Status" text="{path: 'oDetailModel>Loekz', formatter: '.formatter.PODelIndDesc'}" state="{path:'oDetailModel>Loekz', formatter:'.formatter.PoDelStatus'}" id="idActiveFlg"/>
+					  
+					</statuses>
+				</ObjectHeader>
+				<IconTabBar select="onDetailSelect" id="idIconTabBar" class="sapUiResponsiveContentPadding">
+				    <items>
+				        <IconTabFilter text="PO Details" id="idPoDetTab" key="PODET" iconColor="Positive">
+				            <content>
+				                	<core:Fragment fragmentName="zpurch_mgmt_app.ZPURCH_MGMT_APP.view.fragments.PODetail" type="XML"/>
+				            </content>
+				        </IconTabFilter>
+				       
+				        <IconTabFilter text="Attachment" id="idPoAttachTab" key="PODOC" iconColor="Positive">
+				        	<content>
+				                	<core:Fragment fragmentName="zpurch_mgmt_app.ZPURCH_MGMT_APP.view.fragments.POAttachment" type="XML"/>
+				            </content>
+				             </IconTabFilter>
+				       </items>
+				</IconTabBar>
+				<footer id="Footer_Search">
+				<OverflowToolbar width="100%" id="toolbar1">
+				    <!--<content>-->
+				        <ToolbarSpacer id="spacer0"/>
+				        <Button id="idBtnPoSave" text="{i18n>savePOTxt}" visible="true" type="Emphasized" press="onPoSave" class="sapUiMediumMarginEnd" icon="sap-icon://save" />
+				    <!--</content>-->
+				</OverflowToolbar>
+				</footer>
+				
+				<!--</content>-->
+			<!--<content/>-->
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

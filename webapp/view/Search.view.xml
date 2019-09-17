@@ -1,0 +1,93 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar"
+xmlns:core="sap.ui.core" 
+xmlns:layout="sap.ui.layout"
+controllerName="zpurch_mgmt_app.ZPURCH_MGMT_APP.controller.Search" displayBlock="true">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="navBackFLP">
+					<content>
+						<fb:FilterBar id="search_bar" search="onSearchPO1" clear="onResetPO" cancel="onResetPO" filtersDialogClosed="onFiltersDialogClosed" considerGroupTitle="false" useToolbar="false" filterBarExpanded="false" showFilterConfiguration="false" expandAdvancedArea="false" showClearOnFB="true" deltaVariantMode="false" showRestoreButton="true" showClearButton="true">
+							<fb:filterItems>
+								<fb:FilterItem name="lblPoNo" label="{i18n>lblPOnumber}" labelTooltip="{i18n>lblPOnumber}">
+									<fb:control>
+										<MultiInput id="PO" change="handleDataChange" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="onPOValueHelpRequest"
+										maxTokens="5" placeholder="{i18n>phPOnumber}" enableMultiLineMode="true" />
+									</fb:control>
+								</fb:FilterItem>
+							
+								<fb:FilterItem name="lblPoDt" label="{i18n>lblPOdate}" labelTooltip="{i18n>lblPOdate}">
+									<fb:control>
+										<DateRangeSelection id="SearchPODateRange" delimiter="-" dateValue="" secondDateValue="" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" change="handleChangeDateRange"/>
+									</fb:control>
+								</fb:FilterItem>
+								<fb:FilterItem name="lblPoType" label="{i18n>lblPOType}" labelTooltip="{i18n>lblPOType}">
+									<fb:control>
+										<MultiComboBox xmlns="sap.m" id="idPOtypeCB" items="{POTShOutput>/results}" placeholder="{i18n>phPOType}">
+											<items>
+												<core:Item xmlns:core="sap.ui.core" key="{POTShOutput>Bsart}" text="{POTShOutput>BsartTxt}" id="idPOType"/>
+											</items>
+										</MultiComboBox>
+									</fb:control>
+								</fb:FilterItem>
+							</fb:filterItems>
+						</fb:FilterBar>
+						<MessagePage id="messPage" description="{i18n>DescOpt}" icon="sap-icon://documents" showHeader="false" text="{i18n>MsgOpt}"/>
+						<Panel xmlns="sap.m" width="auto" expandable="true" expanded="true" id="panelPoTab" visible="true">
+							<content>
+								<Table id="po_table" visible="false" items="{path:'POSearchOutput>/results'}" updateFinished="onUpdateFinished">
+									<headerToolbar>
+										<Toolbar id="toolbar1">
+											<Title id="panelTitleId" text="{i18n>POCount}"/>
+											<ToolbarSpacer/>
+											<SearchField xmlns="sap.m" placeholder="{i18n>lblPOSearch}" id="POSearchFld" width="20%" liveChange="onSearch"/>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column>
+											<header>
+												<Label text="{i18n>lblPOnumber}" id="label0"/>
+											</header>
+										</Column>
+										<Column>
+											<header>
+												<Label text="{i18n>lblPOType}" id="label1"/>
+											</header>
+										</Column>
+										<Column>
+											<header>
+												<Label text="{i18n>lblPOdate}" id="label2"/>
+											</header>
+										</Column>
+										<Column>
+											<header>
+												<Label text="{i18n>lblCreateBy}" id="label3"/>
+											</header>
+										</Column>
+										<Column>
+											<header>
+												<Label text="{i18n>lblPODelFlag}" id="label4"/>
+											</header>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem type="Navigation" id="item14" press="onNavDetail">
+											<cells>
+												<ObjectIdentifier title="{POSearchOutput>Ebeln}" text=""/>
+												<ObjectIdentifier title="{POSearchOutput>Bsart}" text="{POSearchOutput>Batxt}"/>
+												<Text text="{ path: 'POSearchOutput>AedatFr', formatter: '.formatter.abapDateFormat'}"/>
+												<Text text="{POSearchOutput>Ernam}"/>
+												<ObjectStatus text="{path: 'POSearchOutput>Loekz', formatter: '.formatter.PODelIndDesc'}" state="{path:'POSearchOutput>Loekz', formatter:'.formatter.PoDelStatus'}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</content>
+						</Panel>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

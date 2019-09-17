@@ -1,0 +1,68 @@
+<core:FragmentDefinition height="100%" controllerName="sap.ui.comp.sample.filterbar.example1.FilterBar" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form" xmlns:fb="sap.ui.comp.filterbar" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog id="F4PODialog" title="{i18n>POSearchHelpTitle}" showHeader="true" escapeHandler="escape">
+		<!--	<sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">-->
+		<!--	<Label text="Label" width="100%" id="label0_1566238779238" class="sapUiSmallMargin" />-->
+		<!--	<Input xmlns="sap.m" value="Value" id="input0" class="sapUiSmallMargin"/>-->
+		<!--	<Label text="Label" width="100%" id="label1_1566238793419" class="sapUiSmallMargin" />-->
+		<!--	<Input xmlns="sap.m" value="Value" id="input1" class="sapUiSmallMargin"/>-->
+		<!--</sap.ui.layout:HorizontalLayout>-->
+		<List>
+			<InputListItem label="PO No:">
+				<Input id="idShPOno" value="{F4Model>POno}" type="Text"/>
+			</InputListItem>
+			<!--<InputListItem label="Created on:">-->
+			<!--	<Input id="idShCrtDt" placeholder="Enter format MM/DD/YYYY" value=" " type="Text"/>-->
+			<!--</InputListItem>-->
+			<InputListItem label="PO Type :">
+				<Input id="idShPOType" value=" " type="Text"/>
+			</InputListItem>
+		</List>
+		<!--<HBox>-->
+		<!--	<Label text="Created on:" labelFor="idShCrtDt"/>-->
+		<!--	<DatePicker id="idShCrtDt" value="" displayFormat="MM/dd/yyyy" valueFormat="yyyy-MM-dd" enabled="true"/>-->
+		<!--</HBox>-->
+		<OverflowToolbar width="100%" id="toolbarPOSH">
+			<Title text="{i18n>SearchResult}" id="idSearchResultTxt"/>
+			<content>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Search" press="onSearchPO"/>
+				<!--<OverflowToolbarButton icon="sap-icon://picture" id="button1"/>-->
+			</content>
+		</OverflowToolbar>
+		<Table id="ValuehelpTabPO" visible="false" noDataText="No PO selected" mode="MultiSelect" items="{POShOutput>/results/}">
+			<columns>
+				<Column>
+					<header>
+						<Text text="PO Number" />
+					</header>
+				</Column>
+				<Column>
+					<header>
+						<Text text="Create Dt."/>
+					</header>
+				</Column>
+				<Column>
+					<header>
+						<Text text="PO Type"/>
+					</header>
+				</Column>
+				<Column>
+					<header>
+						<Text text="Create By"/>
+					</header>
+				</Column>
+			</columns>
+			<ColumnListItem>
+				<Text text="{POShOutput>Ebeln}" visible="true"></Text>
+				<Text text= "{path: 'POShOutput>Aedat', formatter: '.formatter.abapdateformat'}" visible="true"></Text>
+				<Text text="{POShOutput>Bsart}" visible="true"></Text>
+				<Text text="{POShOutput>Ernam}" visible="true"></Text>
+			</ColumnListItem>
+		</Table>
+		<buttons>
+			<Button id="okbtn2" class = "btntemplate" text="Ok" visible="false" press="onSelectPO" type="Accept"/>
+			<Button id="closebtn2" class = "btntemplate" text="Close" press="onCancelPO" type="Reject"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

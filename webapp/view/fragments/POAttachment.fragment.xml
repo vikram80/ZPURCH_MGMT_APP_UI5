@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<!--<headerToolbar>-->
+	<!--<Toolbar>-->
+	<!--	<core:Icon src="sap-icon://attachment" class="size1"/>-->
+	<!--	<Title text="Attachments"/>-->
+	<!--</Toolbar>-->
+	<!--	</headerToolbar>-->
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="form0">
+		<f:content>
+			<core:Title text="Attachment" id="title0"/>
+			<Label text="PO Number" id="label0"/>
+			<!--<Text text=" " id="idPoOrg"/> -->
+			<!--<Link xmlns="sap.m" href="https://ui5.sap.com" text="PO Number" target="_blank" id="link0" press="downloadPO"/>-->
+			<Link href="{path:'oDetailModel>/Ebeln',formatter: '.formatter.downloadPO'}" text="{oDetailModel>/Ebeln}" tooltip="{i18n>download}"
+				target="_blank" visible="true"/>
+			<!--<Input width="100%" id="input0"/>-->
+			<!--<Input width="100%" id="input1"/>-->
+			<Label text="Org/Vendor" id="label1"/>
+			<Text text=" {oDetailModel>/Ekorg}/{oDetailModel>/Lifnr}" id="idPoOrg"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

@@ -1,0 +1,60 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<!--<VBox class="21">-->
+	<Table id="idTabPoList" noDataText="No PO Line items found" updateFinished="onUpdateFinished"
+	items="{oDetailModel>/headTolineNav/results}" mode="SingleSelectLeft">
+		<headerToolbar>
+			<Toolbar>
+				<Title id="idTabTitle" text="{i18n>poList}"/>
+				<ToolbarSpacer/>
+				<SearchField xmlns="sap.m" liveChange="onSearch" placeholder="Search for Material No." width="auto" id="idSearchMatno"/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column id="colPoItem" width="5rem">
+				<header>
+					<Label text="Item No."/>
+				</header>
+			</Column>
+			<Column id="colPoMatno">
+				<header>
+					<Label text="Article No."/>
+				</header>
+			</Column>
+			<Column id="colPoQty" width="10rem">
+				<header>
+					<Label text="Quantity"/>
+				</header>
+			</Column>
+			<Column id="colPoPlant" width="10rem">
+				<header>
+					<Label text="Store"/>
+				</header>
+			</Column>
+			<Column id="colPoDelvDt">
+				<header>
+					<Label text="Delivery Date"/>
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem type="Active">
+				<cells>
+					<Text text="{oDetailModel>Ebelp}"/>
+						<VBox>
+							<Link text="{oDetailModel>Matnr}" press="showMaterialDetail"/>
+							<Text text="{oDetailModel>Matnrdesc}"/>
+						</VBox>
+					
+					<!--<ObjectIdentifier title="{oDetailModel>Matnr}" text="{oDetailModel>Matnrdesc}"/>-->
+					<Input id="idInpQty" value="{path: 'oDetailModel>Menge', formatter: '.formatter.numberFormat'}"	
+					change="handleQtyChg" />
+					<!--value="{path: 'oDetailModel>Menge', formatter: '.formatter.numberFormat'}"/>-->
+					<Text text="{oDetailModel>Werks}"/>
+					<!--<DatePicker xmlns="sap.m" id="picker0" valueFormat="yyyy-MM-dd" displayFormat="MM/dd/yyyy"/>-->
+					<Text text="{path:'oDetailModel>Aedat',formatter: '.formatter.abapDateFormat'}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<!--</VBox>-->
+</core:FragmentDefinition>

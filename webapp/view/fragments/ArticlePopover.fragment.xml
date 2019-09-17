@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog id="materialDetail" title="Article: {materialDetailModel>/Matnr}" contentWidth="700px" afterClose="onCloseDialog">
+		<VBox class="sapUiSmallMargin">
+			<HBox class="partclass">
+				<ObjectIdentifier title="Article Number" text="{materialDetailModel>/Matnr}" titleActive="false" titlePress="titleClicked"/>
+				<ObjectIdentifier title="Description" text="{materialDetailModel>/Matnrdesc}" titleActive="false"
+					titlePress="titleClicked"/>
+			</HBox>
+			<Panel expandable="true" expanded="true" width="auto">
+				<headerToolbar>
+					<Toolbar height="3rem">
+						<Title text="Grouping"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<HBox>
+						<Text text="Article Type:"/>
+					    <Text text="{materialDetailModel>/Mtart}"/>	
+					</HBox>
+					<HBox>
+						<Text text="Created By:"/>
+					    <Text text="{materialDetailModel>/Ernam}"/>	
+					</HBox>
+				</content>
+			</Panel>
+			<Panel expandable="true" expanded="true" width="auto">
+				<headerToolbar>
+					<Toolbar height="3rem">
+						<Title text="Validity"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<!--<Text text="{parts: [{path:'{materialDetailModel>/Datab}',formatter: '.formatter.abapDateFormat'}, -->
+					<!-- {path:'{materialDetailModel>/Liqdt}',formatter: '.formatter.abapDateFormat'}]"	 />-->
+					<HBox>
+						<Text text="{path:'materialDetailModel>/Datab',formatter: '.formatter.abapDateFormat'}-" />
+						<Text text="{path:'materialDetailModel>/Liqdt',formatter: '.formatter.abapDateFormat'}" />
+					</HBox>
+						<!--<Text text="{-->
+						<!--parts: [{path:'materialDetailModel>/Datab',formatter: '.formatter.abapDateFormat'},-->
+						<!--        {path:'-'},-->
+					 <!--           {path:'materialDetailModel>/Liqdt',formatter: '.formatter.abapDateFormat'}]}"	 />-->
+    			</content>
+			</Panel>
+			
+		</VBox>
+		<beginButton>
+			<Button text="Close" press="onCloseMatDialog"/>
+		</beginButton>
+		
+	</Dialog>
+
+
+	</core:FragmentDefinition>

@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="Error Log">
+		<List mode="None" items="{errorModel>/}">
+				<CustomListItem>
+					<HBox>
+						<core:Icon src="sap-icon://message-error" class="erroricon sapUiSmallMarginBegin"/>
+						<Label class="errotext" text="{errorModel>message}"/>
+					</HBox>
+				</CustomListItem>
+		</List>
+		<beginButton>
+			<Button text="Close" press="handleOkDialogError" type="Accept"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>
