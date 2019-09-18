@@ -12,7 +12,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		 */
 		formatter: formatter,
 		onInit: function () {
-//Test 2 changes
+			//Test 2 changes
 			var oThis = this;
 			//sap.ui.core.UIComponent.getRouterFor(this).attachRouteMatched(this.onRouteMatched, this);
 			var oComponent = oThis.getOwnerComponent();
@@ -215,7 +215,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		onUpdateFinished: function (oEvent) {
 
 		},
-		handleQtyChg: function (oEvent){
+		handleQtyChg: function (oEvent) {
 			var oView = this.getView();
 			var detailData = this.getOwnerComponent().getModel("oDetailModel").getProperty("/headTolineNav/results");
 			var a = this.getView().byId("idTabPoList").getSelectedContexts()[0].sPath.split("/");
@@ -226,13 +226,87 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			// 	var ActualDateval = ActualDateData + "T00:00:00";
 			// }
 			detailData[(a[3])].Menge = MengeVal;
-		
+
 		},
-			handleOkDialogError: function () {
+		handleOkDialogError: function () {
 			var oThis = this;
 			if (oThis.oErrDialog) {
 				oThis.oErrDialog.close();
 			}
+		},
+		// Upload documents against order
+		handleUploadPress: function (oEvent) {
+
+			var oThis = this;
+			var oView = this.getView();
+			// Reading upload content
+			var file = jQuery.sap.domById("" + oThis.getView().byId("idAttachfile").getId() + "-fu").files[0];
+			// var doctype = oView.byId("eqcal_doctype").getSelectedKey();
+			// var oDetailModel = this.getView().getModel("oDetailModel"); //JSON Model
+			var oPOModel = oThis.getOwnerComponent().getModel("POModel"); //OData Model
+			// var EquObj = oDetailModel.getData();
+			var payloadXtr;
+
+			if (file) {
+
+				var base64_marker = "data:" + file.type + ";base64,'";
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+
+				reader.onload = function () {
+					var base64Index = reader.result.indexOf(base64_marker) + base64_marker.length;
+					payloadXtr = reader.result.substring(base64Index);
+
+					var payload = {
+						// "MsgTxt": "",
+						// "FileHeadAttachment": [{
+							// "AppId": "EQUIP_CAL",
+							// "EquipNbr": "",
+							// "OrderNbr": EquObj.CalOrder,
+							// "ArchDocId": doctype,
+							"FileName": file.name,
+							// "FileDesc": doctype,
+							"Mimetype": file.type,
+							"FileContent": payloadXtr,
+							// "Message": "",
+							// "Status": " "
+						// }]
+					};
+
+					oPOModel.create("/FileHeaderSet", payload, {
+						success: function (oData, response) {
+
+							var fileUploadMsg = oThis._oResourceBundle.getText("fileUploadMsg");
+							var bCompact = !!oThis.getView().$().closest(".sapUiSizeCompact").length;
+
+							MessageBox.success(
+								fileUploadMsg, {
+									styleClass: bCompact ? "sapUiSizeCompact" : ""
+								});
+							// oThis.fetchAttachments(EquObj.CalOrder);
+						},
+
+						error: function (oError) {
+							oThis.oErrorwrap(oError);
+						}
+					});
+
+				};
+				reader.onerror = function (error) {
+					oThis.oErrorwrap(error);
+				};
+
+			} else {
+				var bCompact = !!oThis.getView().$().closest(".sapUiSizeCompact").length;
+				var fileUploadMandatoryText = oThis._oResourceBundle.getText("fileUploadMandatoryText");
+				MessageBox.error(
+					fileUploadMandatoryText, {
+						styleClass: bCompact ? "sapUiSizeCompact" : ""
+					}
+				);
+				return false;
+			}
+
 		},
 		/**
 		 * 
